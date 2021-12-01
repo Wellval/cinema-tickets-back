@@ -1,0 +1,32 @@
+{
+  "name": "cinema-tickets-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wellval/cinema-tickets-back.git"
+  },
+  "author": "Valentina Masalkova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wellval/cinema-tickets-back/issues"
+  },
+  "homepage": "https://github.com/Wellval/cinema-tickets-back#readme",
+  "dependencies": {
+    "-": "^0.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^4.2.0",
+    "mongoose": "^6.0.13",
+    "save": "^2.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

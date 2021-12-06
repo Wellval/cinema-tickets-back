@@ -12,8 +12,8 @@ const routes = require('../routes/index');
 const PORT = process.env.PORT || 5500;
 
 app.use(cors())
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use(usersRoutes).use(moviesRoutes).use(cinemasRoutes);
 
 async function start() {

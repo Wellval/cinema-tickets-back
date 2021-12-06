@@ -8,6 +8,9 @@ const schema = new Schema({
     email: {
         type: String
     },
+    role: {
+        type: String
+    }
 })
 
 module.exports = model('User', schema)

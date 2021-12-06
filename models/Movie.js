@@ -1,9 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const schema = new Schema({
-    id: {
-        type: String,
-    },
     title: {
         type: String
     },
@@ -17,6 +14,9 @@ const schema = new Schema({
         type: String
     },
     plot: {
+        type: String
+    },
+    image_url: {
         type: String
     }
 })

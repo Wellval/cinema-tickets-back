@@ -1,7 +1,6 @@
 const Movie = require('../models/Movie')
 
 const getMovies = (req, res) => {
-    console.log('Get movies')
     Movie.find().then((result) => {
         res.send(result)
     }).catch((e) => {
@@ -34,4 +33,4 @@ const deleteMovie = (req, res) => {
     })
 }
 
-module.exports = { getMovies, getMovie, deleteMovie, createMovie }
+module.exports = { getMovies, getMovie, deleteMovie, createMovie, searchMovie }

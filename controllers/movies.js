@@ -16,6 +16,15 @@ const getMovie = (req, res) => {
     })
 }
 
+const searchMovie = (req, res) => {
+    const text = req.body.input;
+    const reg = new RegExp(text, 'i')
+
+    Movie.find({ $or:[ {'title': { $regex: reg }}, {year: { $regex: reg }} ]}).then((movies) => {
+        res.send(movies)
+    })
+}
+
 const createMovie = (req, res) => {
     const movie = new Movie(req.body);
     movie.save().then((result) => {

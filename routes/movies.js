@@ -9,7 +9,7 @@ router.get('/:id', moviesController.getMovie);
 
 router.delete('/:id', authController.authenticateJWT, moviesController.deleteMovie);
 
-router.post('/all/add', moviesController.createMovie);
+router.post('/all/add', authController.authenticateJWT, moviesController.createMovie);
 
 router.post('/searched/list', moviesController.searchMovie)
 

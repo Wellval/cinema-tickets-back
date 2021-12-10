@@ -35,7 +35,7 @@ const createMovie = (req, res) => {
 }
 
 const deleteMovie = (req, res) => {
-    Movie.findById(req.params.id).deleteOne().then((result) => {
+    Movie.findById(req.params.id).deleteOne().then(() => {
         getMovies(req, res);
     }).catch((e) => {
         console.log(e)

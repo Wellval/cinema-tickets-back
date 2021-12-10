@@ -8,4 +8,12 @@ const getCinemas = (req, res) => {
     })
 }
 
-module.exports = { getCinemas }
+const getCinema = (req, res) => {
+    Cinema.findById(req.params.id).then((result) => {
+        res.send(result)
+    }).catch((e) => {
+        console.log(e)
+    })
+}
+
+module.exports = { getCinemas, getCinema }

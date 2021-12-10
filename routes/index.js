@@ -3,12 +3,21 @@ const router = express.Router();
 const moviesRoutes = require('./movies'); 
 const cinemasRoutes = require('./cinemas')
 const usersRoutes = require('./users');
-const authRoutes = require('./auth') // пример файла
+const authRoutes = require('./auth');
+const sessionsRoutes = require('./sessions');
+const citiesRoutes = require('./cities');
+const hallsRoutes = require('./halls');
+const timeslotsRoutes = require('./timeslots');
+const datesRoutes = require('./dates');
 
 router.use('/movie', moviesRoutes); 
 router.use('/cinema', cinemasRoutes);
 router.use('/user', usersRoutes);
-router.use('/auth', authRoutes) // пример подключения
-// по аналогии подключение нужных роутов к нужным файлам
+router.use('/auth', authRoutes);
+router.use('/session', sessionsRoutes);
+router.use('/city', citiesRoutes);
+router.use('/hall', hallsRoutes);
+router.use('/timeslot', timeslotsRoutes);
+router.use('/date', datesRoutes);
 
 module.exports = router;

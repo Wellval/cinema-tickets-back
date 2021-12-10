@@ -18,7 +18,8 @@ const schema = new Schema({
     },
     image_url: {
         type: String
-    }
+    },
+    session: { type: Schema.Types.ObjectId, ref: 'Session' },
 })
 
 module.exports = model('Movie', schema)

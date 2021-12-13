@@ -50,7 +50,7 @@ const authenticateJWT = (req, res, next) => {
 
             if (err || user.role !== 'admin') {
                 return res.sendStatus(403);
-            } 
+            }
 
             req.user = user;
             next();

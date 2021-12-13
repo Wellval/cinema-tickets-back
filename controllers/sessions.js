@@ -17,7 +17,7 @@ const getSessions = (req, res) => {
         if (val) {
             if (typeof val === 'string') {
                 obj[key] = mongoose.Types.ObjectId(val)
-            } else if(val.length > 0) {
+            } else if (val.length > 0) {
                 obj[key] = {
                     $in: val.map(id => mongoose.Types.ObjectId(id))
                 }
@@ -26,7 +26,6 @@ const getSessions = (req, res) => {
     }
 
     Session.find(obj).then((result) => {
-        console.log(result)
         res.send(result)
     }).catch((e) => {
         console.log(e)
@@ -35,12 +34,20 @@ const getSessions = (req, res) => {
 
 const getMovieSessions = (req, res) => {
     if (req.params.movieId.match(/^[0-9a-fA-F]{24}$/)) {
-        Session.find({'movie': req.params.movieId }).then((result) => {
+        Session.find({ 'movie': req.params.movieId }).then((result) => {
             res.send(result)
         }).catch((e) => {
             console.log(e)
         })
     }
+}
+
+const deleteSession = (req, res) => {
+    Session.findById(req.params.id).deleteOne().then(() => {
+        getSessions(req, res);
+    }).catch((e) => {
+        console.log(e)
+    })
 }
 
 const createSession = async (req, res) => {
@@ -59,4 +66,4 @@ const createSession = async (req, res) => {
     })
 }
 
-module.exports = { getSessions, getMovieSessions, createSession }
+module.exports = { getSessions, getMovieSessions, createSession, deleteSession }

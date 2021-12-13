@@ -1,9 +1,32 @@
 const Session = require('../models/Session');
 const mongoose = require('mongoose');
 
-
 const getSessions = (req, res) => {
-    Session.find().then((result) => {
+
+    const mappingObj = {
+        city: 'cities',
+        cinema: 'cinemas',
+        date: 'dates',
+        timeslot: 'timeslots'
+    };
+
+    const obj = {};
+
+    for (let key of Object.keys(mappingObj)) {
+        let val = req.query[mappingObj[key]];
+        if (val) {
+            if (typeof val === 'string') {
+                obj[key] = mongoose.Types.ObjectId(val)
+            } else if(val.length > 0) {
+                obj[key] = {
+                    $in: val.map(id => mongoose.Types.ObjectId(id))
+                }
+            }
+        }
+    }
+
+    Session.find(obj).then((result) => {
+        console.log(result)
         res.send(result)
     }).catch((e) => {
         console.log(e)

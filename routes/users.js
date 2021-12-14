@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const usersController = require('../controllers/users')
+const usersController = require('../controllers/users');
+const authController = require('../controllers/auth');
 
-router.get('/all/list', usersController.getUsers);
+router.get('/me', authController.authenticateJWT, usersController.getMe);
 
 module.exports = router;

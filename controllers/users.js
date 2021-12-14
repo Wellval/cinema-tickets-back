@@ -1,12 +1,5 @@
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-
-const getUsers = (req, res) => {
-    User.find().then((result) => {
-        res.send(result)
-    }).catch((e) => {
-        console.log(e)
-    })
+const getMe = (req, res) => {
+    res.send({ ...req.user, password: undefined });
 }
 
-module.exports = { getUsers }
+module.exports = { getMe }

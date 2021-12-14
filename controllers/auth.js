@@ -23,19 +23,23 @@ const registration = (req, res) => {
     })
 }
 
+const refreshToken = (req, res) => {
+    jwt.sign({ id: req.user._id}, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "1h"
+    });
+    return res.status(201).json({ accessToken })
+}
+
 const login = (req, res) => {
     const { email, password } = req.body;
     User.find().then((users) => {
         const user = users.find(u => u.email === email && u.password === md5(password));
         if (user) {
-            const accessToken = jwt.sign({ username: user.email, role: user.role }, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: "2h",
-            })
-            user.token = accessToken;
-            const role = user.role;
+            const accessToken = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: "20s",
+            });
             res.send({
-                accessToken,
-                role
+                accessToken
             });
         } else {
             res.status(403).send('Username or password is incorrect');
@@ -48,17 +52,27 @@ const authenticateJWT = (req, res, next) => {
     if (token) {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
 
-            if (err || user.role !== 'admin') {
+            if (err) {
                 return res.sendStatus(403);
             }
 
-            req.user = user;
-            next();
+            User.findById({ _id: user.id }).then((x) => {
+                req.user = x;
+                next();
+            })
         });
     } else {
         res.sendStatus(401);
     }
 };
 
+const isAdmin = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        next();
+    } else {
+        return res.sendStatus(403);
+    }
+}
 
-module.exports = { registration, login, authenticateJWT }
+
+module.exports = { registration, login, authenticateJWT, refreshToken, isAdmin }

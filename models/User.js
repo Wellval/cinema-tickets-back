@@ -10,9 +10,6 @@ const schema = new Schema({
     },
     role: {
         type: String
-    },
-    token: {
-        type: String
     }
 })
 

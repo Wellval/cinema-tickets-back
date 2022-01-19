@@ -16,4 +16,13 @@ const getDate = (req, res) => {
     })
 }
 
-module.exports = { getDate, getDates }
+const addDate = (req, res) => {
+    const date = new Date(req.body);
+    date.save().then((result) => {
+        res.json(result)
+    }).catch((e) => {
+        console.log(e)
+    })
+}
+
+module.exports = { getDate, getDates, addDate }

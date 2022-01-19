@@ -9,6 +9,9 @@ const citiesRoutes = require('./cities');
 const hallsRoutes = require('./halls');
 const timeslotsRoutes = require('./timeslots');
 const datesRoutes = require('./dates');
+const seatsRoutes = require('./seats');
+const stripeRoutes = require('./stripe');
+
 
 router.use('/movie', moviesRoutes); 
 router.use('/cinema', cinemasRoutes);
@@ -19,5 +22,7 @@ router.use('/city', citiesRoutes);
 router.use('/hall', hallsRoutes);
 router.use('/timeslot', timeslotsRoutes);
 router.use('/date', datesRoutes);
+router.use('/seat', seatsRoutes);
+router.use('/stripe', stripeRoutes);
 
 module.exports = router;

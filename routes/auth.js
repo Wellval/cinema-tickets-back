@@ -6,6 +6,6 @@ router.post('/login', authController.login);
 
 router.post('/registration', authController.registration);
 
-router.post('/token', authController.authenticateJWT, authController.refreshToken);
+router.get('/token', authController.authenticateJWT, authController.refreshToken);
 
 module.exports = router;

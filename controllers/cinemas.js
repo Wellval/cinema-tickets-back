@@ -16,4 +16,14 @@ const getCinema = (req, res) => {
     })
 }
 
-module.exports = { getCinemas, getCinema }
+const addCinema = (req, res) => {
+    const cinema = new Cinema(req.body);
+    cinema.save().then((result) => {
+        res.json(result)
+    }).catch((e) => {
+        console.log(e)
+    })
+}
+
+
+module.exports = { getCinemas, getCinema, addCinema }

@@ -5,14 +5,36 @@ const schema = new Schema({
         type: Schema.Types.ObjectId, ref: 'Movie'
     },
     city: {
-        type: Object
+        type: Schema.Types.ObjectId, ref: 'City'
     },
     cinema: {
         type: Schema.Types.ObjectId, ref: 'Cinema'
     },
     hall: {
-        type:  Schema.Types.ObjectId, ref: 'Hall'
+        type: Schema.Types.ObjectId, ref: 'Hall'
     },
+    hallRows: [[
+            {
+                userId: {
+                    type: String
+                },
+                status: {
+                    type: String
+                },
+                seat: {
+                    category: {
+                        type: String
+                    },
+                    price: {
+                        type: Number
+                    },
+                    _id: {
+                        type: Schema.Types.ObjectId, ref: 'Seat'
+                    }
+                }
+            }
+        ]]
+    ,
     timeslot: {
         type: Object
     },

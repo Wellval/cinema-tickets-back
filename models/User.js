@@ -6,10 +6,11 @@ const schema = new Schema({
         required: true,
     },
     email: {
-        type: String
+        type: String || undefined,
+        required: true
     },
-    role: {
-        type: String
+    admin: {
+        type: Boolean
     }
 })
 

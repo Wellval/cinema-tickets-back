@@ -16,4 +16,13 @@ const getTimeslot = (req, res) => {
     })
 }
 
-module.exports = { getTimeslot, getTimeslots }
+const addTimeslot = (req, res) => {
+    const timeslot = new Timeslot(req.body);
+    timeslot.save().then((result) => {
+        res.json(result)
+    }).catch((e) => {
+        console.log(e)
+    })
+}
+
+module.exports = { getTimeslot, getTimeslots, addTimeslot }

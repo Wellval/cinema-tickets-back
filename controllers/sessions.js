@@ -42,6 +42,14 @@ const getMovieSessions = (req, res) => {
     }
 }
 
+const getSession = (req, res) => {
+    Session.findById(req.params.id).then((result) => {
+        res.send(result)
+    }).catch((e) => {
+        console.log(e)
+    })
+}
+
 const deleteSession = (req, res) => {
     Session.findById(req.params.id).deleteOne().then(() => {
         getSessions(req, res);
@@ -55,7 +63,8 @@ const createSession = async (req, res) => {
         movie: mongoose.Types.ObjectId(req.body.movie),
         city: mongoose.Types.ObjectId(req.body.city),
         cinema: mongoose.Types.ObjectId(req.body.cinema),
-        hall: mongoose.Types.ObjectId(req.body.hall),
+        hall: req.body.hall,
+        hallRows: req.body.hallRows,
         date: mongoose.Types.ObjectId(req.body.date),
         timeslot: mongoose.Types.ObjectId(req.body.timeslot),
     });
@@ -66,4 +75,15 @@ const createSession = async (req, res) => {
     })
 }
 
-module.exports = { getSessions, getMovieSessions, createSession, deleteSession }
+
+const bookSessionSeats = (req, res) => {
+    let newSession = {
+        hallRows: req.body.hallRows
+    }
+    Session.findByIdAndUpdate(req.params.id, newSession, function (err) {
+        if (err) { res.send(err); }
+        res.json(newSession);
+    })
+}
+
+module.exports = { getSessions, getMovieSessions, createSession, deleteSession, bookSessionSeats, getSession }

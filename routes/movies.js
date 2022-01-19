@@ -7,9 +7,9 @@ router.get('/all/list', moviesController.getMovies);
 
 router.get('/:id', moviesController.getMovie);
 
-router.delete('/:id', authController.authenticateJWT, moviesController.deleteMovie);
+router.delete('/:id', authController.authenticateJWT, authController.isAdmin, moviesController.deleteMovie);
 
-router.post('/all/add', authController.authenticateJWT, moviesController.createMovie);
+router.post('/all/add', authController.authenticateJWT, authController.isAdmin, moviesController.createMovie);
 
 router.post('/searched/list', moviesController.searchMovie)
 

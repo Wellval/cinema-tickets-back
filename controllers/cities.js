@@ -16,4 +16,13 @@ const getCity = (req, res) => {
     })
 }
 
-module.exports = { getCity, getCities }
+const addCity = (req, res) => {
+    const city = new City(req.body);
+    city.save().then((result) => {
+        res.json(result)
+    }).catch((e) => {
+        console.log(e)
+    })
+}
+
+module.exports = { getCity, getCities, addCity }

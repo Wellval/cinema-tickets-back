@@ -24,8 +24,8 @@ const registration = (req, res) => {
 }
 
 const refreshToken = (req, res) => {
-    jwt.sign({ id: req.user._id}, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "1h"
+    const accessToken = jwt.sign({ id: req.user._id }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "24h"
     });
     return res.status(201).json({ accessToken })
 }
@@ -36,7 +36,7 @@ const login = (req, res) => {
         const user = users.find(u => u.email === email && u.password === md5(password));
         if (user) {
             const accessToken = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: "20s",
+                expiresIn: "12h",
             });
             res.send({
                 accessToken
@@ -67,7 +67,7 @@ const authenticateJWT = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-    if (req.user && req.user.role === 'admin') {
+    if (req.user && req.user.admin === true) {
         next();
     } else {
         return res.sendStatus(403);

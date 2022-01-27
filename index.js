@@ -35,17 +35,32 @@ io.on('connect', function (socket) {
         connections.push({ socket: socket, sessionId: session._id });
     });
 
+    let timer = (id_room) => {
+        let i = 60;
+        obj.time = setInterval(() => {
+            io.sockets.in(id_room).emit('timerUpdate', i);
+            i--;
+        }, 1000);
+    };
+
+    socket.on('offer', function (data) {
+        clearInterval(obj.time);
+        timer(data.id_room);
+    });
+
     socket.on('reserve', (obj) => {
-        Session.findById(obj.session._id.toString(), function (err, doc) {
+        Session.findById(obj.session._id, function (err, doc) {
             doc.hallRows = obj.session.hallRows;
             doc.save(function (err) {
                 if (err) { console.log(err); }
             })
             let sessionConnections = connections.filter(connection => connection.sessionId.toString() === obj.session._id.toString())
+            // console.log(sessionConnections)
+
             for (let connection of sessionConnections) {
                 connection.socket.emit('reserved', JSON.stringify(doc));
             }
-        })
+        });
     });
 
     socket.on('disconnect', function (session) {

@@ -8,7 +8,7 @@ const http = require('http').createServer(app);
 const socket = require("socket.io");
 const io = socket(http, {
     cors: {
-        origin: "http://localhost:8080",
+        origin: "https://cinema-tickets-app-client.herokuapp.com/",
         methods: ["GET", "POST"]
     }
 });

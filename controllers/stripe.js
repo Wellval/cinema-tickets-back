@@ -20,8 +20,8 @@ const addCheckoutSession = async (req, res) => {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
-            success_url: `http://localhost:8080/movie/${req.body.movie}`,
-            cancel_url: 'http://localhost:8080/movies',
+            success_url: `https://cinema-tickets-app-client.herokuapp.com/movie/${req.body.movie}`,
+            cancel_url: 'https://cinema-tickets-app-client.herokuapp.com/movies',
             line_items: Object.values(result)
         })
         completePurchase();
